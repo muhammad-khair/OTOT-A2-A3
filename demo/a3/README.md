@@ -191,7 +191,7 @@ Here is the explanation of the fields:
 Run the command:
 
 ```
-$ kubectl get po -lapp=backend-zone-aware -owide --sort-by='.spec.nodeName'
+$ kubectl get po -l app=backend-zone-aware -owide --sort-by='.spec.nodeName'
 NAME                                 READY   STATUS    RESTARTS       AGE     IP            NODE                NOMINATED NODE   READINESS GATES
 backend-zone-aware-f9b99b55f-fx99l   1/1     Running   1 (110s ago)   4m54s   10.244.3.6    cluster-1-worker    <none>           <none>
 backend-zone-aware-f9b99b55f-5c4j7   1/1     Running   1 (110s ago)   4m54s   10.244.1.7    cluster-1-worker2   <none>           <none>
