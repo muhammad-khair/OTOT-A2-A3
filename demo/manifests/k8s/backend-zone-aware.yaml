@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: nginx:latest
+          image: nginx:stable
+          imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8080
