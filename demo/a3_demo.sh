@@ -3,7 +3,7 @@
 run() {
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
     kubectl -nkube-system edit deploy/metrics-server
-    ## maunally add a flag --kubelet-insecure-tls to deployment.spec.containers[].args[] (around line 40)
+    ## maunally add a flag --kubelet-insecure-tls to deployment.spec.containers[].args[] (around line 45)
     kubectl -nkube-system rollout restart deploy/metrics-server
 
     kubectl apply -f manifests/k8s/backend-hpa.yaml
