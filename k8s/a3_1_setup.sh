@@ -42,16 +42,35 @@ apply_ingress() {
     ## review
     kubectl get ingress 
     kubectl get nodes
+}
+
+apply_metrics() {
+    kubectl apply -f manifests/k8s/metrics.yaml
+}
+
+apply_hpa() {
+    kubectl apply -f manifests/k8s/hpa.yaml
+
+    sleep 3
+    kubectl wait --for=condition=ready pod -l app=backend --timeout=180s
+
+    ## review
+    kubectl get deployment/backend
+    kubectl get nodes -L topology.kubernetes.io/zone
     kubectl get pods
+    kubectl describe hpa
 }
 
 run() {
     create_cluster
-    
+
     apply_backend
     apply_ingress_deploy
     apply_service
     apply_ingress
+
+    apply_metrics
+    apply_hpa
 }
 
 delete() {

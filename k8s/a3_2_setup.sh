@@ -9,14 +9,15 @@ create_cluster() {
     kubectl cluster-info
 }
 
-apply_backend() {
-    kubectl apply -f manifests/k8s/backend.yaml
+apply_backend_zone_aware() {
+    kubectl apply -f manifests/k8s/backend-zone-aware.yaml
 
     sleep 3
-    kubectl wait --for=condition=ready pod -l app=backend --timeout=180s
+    kubectl wait --for=condition=ready pod -l app=backend-zone-aware --timeout=180s
 
     ## review
-    kubectl get deployment/backend
+    kubectl get deployment/backend-zone-aware
+    kubectl get po -l app=backend-zone-aware -owide --sort-by='.spec.nodeName'
 }
 
 apply_ingress_deploy() {
@@ -29,15 +30,15 @@ apply_ingress_deploy() {
     kubectl -n ingress-nginx get deploy
 }
 
-apply_service() {
-    kubectl apply -f manifests/k8s/service.yaml
+apply_service_zone_aware() {
+    kubectl apply -f manifests/k8s/service-zone-aware.yaml
 
     ## review
     kubectl get svc 
 }
 
-apply_ingress() {
-    kubectl apply -f manifests/k8s/ingress.yaml
+apply_ingress_zone_aware() {
+    kubectl apply -f manifests/k8s/ingress-zone-aware.yaml
 
     ## review
     kubectl get ingress 
@@ -48,10 +49,10 @@ apply_ingress() {
 run() {
     create_cluster
     
-    apply_backend
+    apply_backend_zone_aware
     apply_ingress_deploy
-    apply_service
-    apply_ingress
+    apply_service_zone_aware
+    apply_ingress_zone_aware
 }
 
 delete() {

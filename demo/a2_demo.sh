@@ -7,9 +7,6 @@ run() {
     kubectl get nodes
     kubectl cluster-info
 
-    docker pull nginx:stable
-    kind load docker-image nginx:stable --name kind-1
-
     kubectl apply -f manifests/k8s/backend-deployment.yaml
     sleep 3
     kubectl wait --for=condition=ready pod -l app=backend --timeout=180s

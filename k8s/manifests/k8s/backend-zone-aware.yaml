@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: lpkhair252/otot-a1.1
+          image: lpkhair252/otot-a1.1:latest
           ports:
             - name: http
               containerPort: 8080
