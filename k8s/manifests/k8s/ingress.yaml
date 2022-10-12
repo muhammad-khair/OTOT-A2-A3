@@ -4,13 +4,13 @@ metadata:
   name: backend
   labels:
     app: backend
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1 
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1 
 spec:
   rules:
     - http:
         paths:
-          - path: /app
+          - path: /
             pathType: Prefix
             backend:
               service:

@@ -4,13 +4,13 @@ metadata:
   name: backend-zone-aware
   labels:
     app: backend-zone-aware
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1 
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1 
 spec:
   rules:
     - http:
         paths:
-          - path: /app
+          - path: /
             pathType: Prefix
             backend:
               service:
