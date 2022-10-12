@@ -44,6 +44,7 @@ apply_ingress_zone_aware() {
     kubectl get ingress 
     kubectl get nodes
     kubectl get pods
+    kubectl get nodes -L topology.kubernetes.io/zone
 }
 
 run() {
